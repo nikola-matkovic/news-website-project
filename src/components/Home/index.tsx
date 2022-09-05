@@ -1,9 +1,11 @@
+import { useState, useEffect, useContext } from "react";
 import Layout from "../Layout";
 
 const Home = () => {
+    const [news, setNews] = useState([]);
     return (
         <Layout>
-            Home
+            
         </Layout> 
     );
 }
