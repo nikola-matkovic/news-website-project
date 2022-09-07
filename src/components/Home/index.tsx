@@ -3,7 +3,6 @@ import { useState, useEffect, /*useContext*/ } from "react";
 import Layout from "../Layout";
 import key  from "./../api/key.json";
 import style from "./style.module.css"
-
 const Home = () => {
     const apiKey = key.key;
     const [news, setNews] = useState([]);
@@ -11,6 +10,8 @@ const Home = () => {
     const [category, setCategory] = useState("technology");
     const [q, setQ] = useState("");
     const [pageSize, setPageSize] = useState(20);
+    const supporetdCountries = ["ae","ar","at","au","be","bg","br","ca","ch","cn","co","cu","cz","de","eg","fr","gb","gr","hk","hu","id","ie","il","in","it","jp","kr","lt","lv","ma","mx","my","ng","nl","no","nz","ph","pl","pt","ro","rs","ru","sa","se","sg","si","sk","th","tr","tw","ua","us","ve","za"]
+    let regionNames = new Intl.DisplayNames(['en'], {type: 'region'});
     useEffect( ()=> {
         if(country === ""){
             axios.get('https://ipapi.co/json/')
@@ -35,7 +36,6 @@ const Home = () => {
             console.log(error);
         })
     }, [country]);
-
     let articlesJSX = news.map((article, index) => {
         const {author, urlToImage, title, description} = article;
         console.log(description);
@@ -47,12 +47,31 @@ const Home = () => {
             </div>
         )
     })
+    function getFlagEmoji(code:string) {
+        const codePoints = code.toUpperCase().split("").map((char) => 127397 + char.charCodeAt(0));
+        return String.fromCodePoint(...codePoints);
+    }
+    let countriesSelectElement = 
+        <select name="country" id="country">
+            {supporetdCountries.map( (country)  => 
+                <option value={country}> 
+                   <p><i>{getFlagEmoji(country)}</i> {regionNames.of(country.toUpperCase())}</p>
+                </option>)
+            }
+        </select>
     return (
         <Layout>
-            <section className={style.grid}>
-                {articlesJSX}
-            </section>
+            <main>
+                <div className={style.filters}>
+                    <p>Select country</p>
+                        {countriesSelectElement}
+                </div>
+                <section className={style.grid}>
+                    {articlesJSX}
+                </section>
+            </main>
         </Layout> 
+
     );
 }
 
