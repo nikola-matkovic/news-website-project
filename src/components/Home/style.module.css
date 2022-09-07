@@ -1,19 +1,23 @@
 .grid{
     display: grid;
-    grid-template-columns: auto auto auto auto;
-    gap: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 400px));
+    justify-content: space-evenly;
     padding: 20px;
 }
 .articleCard{
-
+    border: 1px solid rgb(242, 242, 242);
+    margin-bottom: 20px;
+    border-radius: 5px;
 }
 .articleCard img{
     max-width: 100%;
 }
 
-.articleCard h1{
+.articleCard h2{
+    margin: 5px;
     font-family: 'Inter', sans-serif;
 }
 .articleCard p,  .articleCard span{
+    margin: 5px;
     font-family: 'Karla', sans-serif;
 }
