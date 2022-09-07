@@ -30,20 +30,28 @@ const Home = () => {
         })
         .then((response)=>{
             setNews(response.data.articles)
-            console.log(news);
         })
         .catch((error) => {
             console.log(error);
         })
     }, [country]);
 
-    let article = news[0];
-    console.log(article);
+    let articlesJSX = news.map((article, index) => {
+        const {author, urlToImage, title, description} = article;
+        console.log(description);
+        return (
+            <div key={index} className={style.articleCard}>
+                <img src={urlToImage} alt="" />
+                <h2>{title}</h2>
+                <p>{description}</p>
+            </div>
+        )
+    })
 
     return (
-        <Layout> 
-            <section className={style.articleCard}>
-                
+        <Layout>
+            <section className={style.grid}>
+                {articlesJSX}
             </section>
         </Layout> 
     );

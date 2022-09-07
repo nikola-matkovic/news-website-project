@@ -1,0 +1,19 @@
+.grid{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 30px;
+    padding: 20px;
+}
+.articleCard{
+
+}
+.articleCard img{
+    max-width: 100%;
+}
+
+.articleCard h1{
+    font-family: 'Inter', sans-serif;
+}
+.articleCard p,  .articleCard span{
+    font-family: 'Karla', sans-serif;
+}
