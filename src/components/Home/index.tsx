@@ -47,7 +47,6 @@ const Home = () => {
             </div>
         )
     })
-
     return (
         <Layout>
             <section className={style.grid}>
