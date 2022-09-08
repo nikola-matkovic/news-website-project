@@ -38,7 +38,6 @@ const Home = () => {
     }, [country]);
     let articlesJSX = news.map((article, index) => {
         const {author, urlToImage, title, description} = article;
-        console.log(description);
         return (
             <div key={index} className={style.articleCard}>
                 <img src={urlToImage} alt="" />
@@ -53,8 +52,8 @@ const Home = () => {
     }
     let countriesSelectElement = 
         <select name="country" id="country">
-            {supporetdCountries.map( (country)  => 
-                <option value={country}> 
+            {supporetdCountries.map( (country, index)  => 
+                <option key={index} value={country}> 
                    <p><i>{getFlagEmoji(country)}</i> {regionNames.of(country.toUpperCase())}</p>
                 </option>)
             }
