@@ -3,6 +3,8 @@
     grid-template-columns: repeat(auto-fill, minmax(250px, 400px));
     justify-content: space-evenly;
     padding: 20px;
+    width: 100%;
+    transition: all .3s;
 }
 .articleCard{
     border: 1px solid rgb(242, 242, 242);
@@ -17,7 +19,6 @@
 .articleCard img{
     max-width: 100%;
 }
-
 .articleCard h2{
     margin: 5px;
     font-family: 'Inter', sans-serif;
@@ -27,4 +28,26 @@
 .articleCard p,  .articleCard span{
     margin: 5px;
     font-family: 'Karla', sans-serif;
+}
+main {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+}
+.filters {
+    overflow: hidden;
+}
+.check {
+    display: none;
+}
+.check + .filters{
+    width: 0;
+    transition: translate .3s;
+    overflow: hidden;
+    translate: -100px;
+}
+.check:checked + .filters {
+    width: 100px;
+    translate: 0px;
 }

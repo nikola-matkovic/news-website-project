@@ -3,6 +3,7 @@ import { useState, useEffect, /*useContext*/ } from "react";
 import Layout from "../Layout";
 import key  from "./../api/key.json";
 import style from "./style.module.css"
+
 const Home = () => {
     const apiKey = key.key;
     const [news, setNews] = useState([]);
@@ -12,7 +13,9 @@ const Home = () => {
     const [pageSize, setPageSize] = useState(20);
     const supporetdCountries = ["ae","ar","at","au","be","bg","br","ca","ch","cn","co","cu","cz","de","eg","fr","gb","gr","hk","hu","id","ie","il","in","it","jp","kr","lt","lv","ma","mx","my","ng","nl","no","nz","ph","pl","pt","ro","rs","ru","sa","se","sg","si","sk","th","tr","tw","ua","us","ve","za"]
     let regionNames = new Intl.DisplayNames(['en'], {type: 'region'});
+    
     useEffect( ()=> {
+        //set country 
         if(country === ""){
             axios.get('https://ipapi.co/json/')
             .then((response) => {
@@ -20,6 +23,7 @@ const Home = () => {
                 setCountry(data.country_code);
             })
         }
+        //set news
         axios.get('https://newsapi.org/v2/top-headlines', {
             params:{
                 apiKey,
@@ -36,6 +40,8 @@ const Home = () => {
             console.log(error);
         })
     }, [country]);
+
+    // JSX Part 
     let articlesJSX = news.map((article, index) => {
         const {author, urlToImage, title, description} = article;
         return (
@@ -46,22 +52,34 @@ const Home = () => {
             </div>
         )
     })
+    //get flag emojy
     function getFlagEmoji(code:string) {
         const codePoints = code.toUpperCase().split("").map((char) => 127397 + char.charCodeAt(0));
         return String.fromCodePoint(...codePoints);
     }
+
     let countriesSelectElement = 
-        <select name="country" id="country">
-            {supporetdCountries.map( (country, index)  => 
-                <option key={index} value={country}> 
-                   <p><i>{getFlagEmoji(country)}</i> {regionNames.of(country.toUpperCase())}</p>
-                </option>)
-            }
+        <select defaultValue ={country.toLowerCase()} 
+            onChange={e => setCountry(e.target.value)} name="country" id="country"
+        >
+            {supporetdCountries.map( (c, index)  => { 
+                console.log(c, country);
+                if(index === 4) return  <option key={index} value={c} selected> 
+                   <p><i>{getFlagEmoji(c) }</i> {regionNames.of(c.toUpperCase())}</p>
+                </option>
+                else{
+                    return <option key={index} value={c} > 
+                        <p><i>{getFlagEmoji(c) }</i> {regionNames.of(c.toUpperCase())}</p>
+                    </option>
+                }    
+            })}
         </select>
+        
     return (
         <Layout>
             <main>
-                <div className={style.filters}>
+                <input type="checkbox" name="check" id="check" className={style.check}/>
+                <div id="filters" className={style.filters}>
                     <p>Select country</p>
                         {countriesSelectElement}
                 </div>
