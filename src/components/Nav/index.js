@@ -1,6 +1,8 @@
 import style from './style.module.css'
-import myContext from "../Home"
-const Nav = () => {
+import MyContext from "../../App"
+
+
+const Nav = (props) => {
     return (
         <div>
             <label htmlFor="check">
