@@ -1,9 +1,12 @@
 import Nav from "../Nav";
 import Footer from "../Footer";
-const Layout = ( props: any ) => {
+const Layout = ( props ) => {
+
+    let {q, setQ} = props
+    console.log({q, setQ},  "Layout");
     return (
         <>
-            <Nav/>
+            <Nav q={q} setQ ={setQ}  />
                 {props.children}
             <Footer/>
         </> 

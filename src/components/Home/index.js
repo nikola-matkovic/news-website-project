@@ -1,20 +1,19 @@
 import axios from "axios";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import Layout from "../Layout";
 import key  from "../api/key.json";
 import style from "./style.module.css"
-import { MyContext } from "../../App";
-
-
 const Home = () => {
-    let context = useContext(MyContext);
-    let {q, setQ} = context
-    const apiKey = key.key;
+    const apiKey = key.key2;
     const [news, setNews] = useState([]);
     const [country, setCountry] = useState("")
     const [category, setCategory] = useState("technology");
     const [pageSize, setPageSize] = useState(20);
-    const supporetdCountries = ["ae","ar","at","au","be","bg","br","ca","ch","cn","co","cu","cz","de","eg","fr","gb","gr","hk","hu","id","ie","il","in","it","jp","kr","lt","lv","ma","mx","my","ng","nl","no","nz","ph","pl","pt","ro","rs","ru","sa","se","sg","si","sk","th","tr","tw","ua","us","ve","za"]
+    const [q, setQ] = useState("")
+
+    const supporetedCountries = ["ae","ar","at","au","be","bg","br","ca","ch","cn","co","cu","cz","de","eg","fr","gb","gr","hk","hu","id","ie","il","in","it","jp","kr","lt","lv","ma","mx","my","ng","nl","no","nz","ph","pl","pt","ro","rs","ru","sa","se","sg","si","sk","th","tr","tw","ua","us","ve","za"]
+    const supporetdCategories = ["business", "entertainment" , "health", "science", "sports", "technology"] 
+    
     let regionNames = new Intl.DisplayNames(['en'], {type: 'region'});
     
     useEffect( ()=> {
@@ -42,11 +41,11 @@ const Home = () => {
         .catch((error) => {
             console.log(error);
         })
-    }, [country]);
+    }, [country, q, category, pageSize, apiKey]);
 
     // JSX Part 
     let articlesJSX = news.map((article, index) => {
-        const {author, urlToImage, title, description} = article;
+        const {urlToImage, title, description} = article;
         return (
             <div key={index} className={style.articleCard}>
                 <img src={urlToImage} alt="" />
@@ -60,12 +59,11 @@ const Home = () => {
         const codePoints = code.toUpperCase().split("").map((char) => 127397 + char.charCodeAt(0));
         return String.fromCodePoint(...codePoints);
     }
-
     let countriesSelectElement = 
         <select defaultValue ={country.toLowerCase()} 
-            onChange={e => setCountry(e.target.value)} name="country" id="country"
+            onChange={e => { setCategory(""); setCountry(e.target.value)}} name="country" id="country"
         >
-            {supporetdCountries.map( (c, index)  => { 
+            {supporetedCountries.map( (c, index)  => { 
                 if(index === 4) return  <option key={index} value={c} > 
                    <p><i>{getFlagEmoji(c) }</i> {regionNames.of(c.toUpperCase())}</p>
                 </option>
@@ -76,22 +74,34 @@ const Home = () => {
                 }    
             })}
         </select>
-        
+    
+    let categoriesElement =
+        <select name="" id="" value={category}  onChange={(e) => {setCategory(e.target.value) ; setCountry("") } }>
+            {
+                supporetdCategories.map( (cat, index) =>{
+                    return <option value={cat} key={index}>
+                        {cat}
+                    </option>
+                })
+            }
+        </select>
     return (
-        <Layout>
+        <Layout  q = {q} setQ={setQ}>
             <main>
                 <input type="checkbox" name="check" id="check" className={style.check}/>
                 <div id="filters" className={style.filters}>
                     <p>Select country</p>
                     {countriesSelectElement}
                     <p>Select category</p>
+                    {categoriesElement}
+                    <p>Number of results</p>
+                    <input  value={pageSize} type="number" min={20} max={20} step="5"  onChange={(e) => setPageSize(e.target.value)}  />
                 </div>
                 <section className={style.grid}>
                     {articlesJSX}
                 </section>
             </main>
         </Layout> 
-
     );
 }
 
