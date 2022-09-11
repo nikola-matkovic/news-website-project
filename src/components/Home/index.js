@@ -45,7 +45,8 @@ const Home = () => {
 
     // JSX Part 
     let articlesJSX = news.map((article, index) => {
-        const {urlToImage, title, description} = article;
+        const {url, urlToImage, title, description} = article;
+        console.log(url);
         return (
             <div key={index} className={style.articleCard}>
                 <img src={urlToImage} alt="" />

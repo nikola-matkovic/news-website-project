@@ -3,7 +3,6 @@ import Footer from "../Footer";
 const Layout = ( props ) => {
 
     let {q, setQ} = props
-    console.log({q, setQ},  "Layout");
     return (
         <>
             <Nav q={q} setQ ={setQ}  />
