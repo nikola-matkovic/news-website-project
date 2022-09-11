@@ -6,7 +6,7 @@ export let  MyContext = createContext({})
 
 
 function App() {
-  const [q, setQ] = useState("");
+  const [q, setQ] = useState("it works");
   return (
     <MyContext.Provider value={{q, setQ}}>
       <RouterPage />

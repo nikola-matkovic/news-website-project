@@ -1,0 +1,10 @@
+.nav {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    height: 50px;
+    display: flex;
+    justify-content: flex-start;
+    align-items:center;
+    padding: 20px;
+}
