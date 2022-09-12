@@ -15,8 +15,6 @@ const Articel = () => {
         })
     }, []);
    
-
-
     return (
         <Layout>
             <div>
