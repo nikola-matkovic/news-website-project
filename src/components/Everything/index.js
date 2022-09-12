@@ -7,7 +7,7 @@ const Everything = () => {
     
     var d = new Date();
     d = d.toISOString().split('T')[0]
-    const apiKey = key.key;
+    const apiKey = key.key3;
     const [news, setNews] = useState([]);
     const [language, setLanguage] = useState("")
     const [pageSize, setPageSize] = useState(20);

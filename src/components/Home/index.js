@@ -3,13 +3,21 @@ import { useState, useEffect } from "react";
 import Layout from "../Layout";
 import key  from "../api/key.json";
 import style from "./style.module.css"
+import { useNavigate } from "react-router-dom";
+
 const Home = () => {
-    const apiKey = key.key2;
+    const apiKey = key.key3;
     const [news, setNews] = useState([]);
     const [country, setCountry] = useState("")
     const [category, setCategory] = useState("technology");
     const [pageSize, setPageSize] = useState(20);
     const [q, setQ] = useState("")
+
+    let navigate = useNavigate();
+
+    const openArticle = (article) => {
+        navigate('/article',  {replace: false,  state:{article}});
+    }
 
     const supporetedCountries = ["ae","ar","at","au","be","bg","br","ca","ch","cn","co","cu","cz","de","eg","fr","gb","gr","hk","hu","id","ie","il","in","it","jp","kr","lt","lv","ma","mx","my","ng","nl","no","nz","ph","pl","pt","ro","rs","ru","sa","se","sg","si","sk","th","tr","tw","ua","us","ve","za"]
     const supporetdCategories = ["business", "entertainment" , "health", "science", "sports", "technology"] 
@@ -42,13 +50,13 @@ const Home = () => {
             console.log(error);
         })
     }, [country, q, category, pageSize, apiKey]);
+    //link for specific article
 
     // JSX Part 
     let articlesJSX = news.map((article, index) => {
         const {url, urlToImage, title, description} = article;
-        console.log(url);
         return (
-            <div key={index} className={style.articleCard}>
+            <div onClick={(e) => openArticle(article)} key={index} className={style.articleCard}>
                 <img src={urlToImage} alt="" />
                 <h2>{title}</h2>
                 <p>{description}</p>
