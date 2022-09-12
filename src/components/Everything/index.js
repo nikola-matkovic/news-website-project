@@ -6,10 +6,10 @@ import style from "./style.module.css"
 const Everything = () => {
     
     var d = new Date();
-    d = d.toISOString();
-    const apiKey = key.key2;
+    d = d.toISOString().split('T')[0]
+    const apiKey = key.key;
     const [news, setNews] = useState([]);
-    const [lang, setLang] = useState("")
+    const [language, setLanguage] = useState("")
     const [pageSize, setPageSize] = useState(20);
     const [q, setQ] = useState("")
     const [fromdate, setFromdate] = useState(d)
@@ -17,9 +17,8 @@ const Everything = () => {
     const [sortBy, setSortBy] = useState("publishedAt");
 
     const suporetedSorts = ["relevancy", "popularity", "publishedAt" ]
-    const supporetedLangs = ["", "ar","de","en","es","fr","he","it","nl","no","pt","ru","sv","ud","zh"]
-    const namesoflangs = ["arabic", "german", "english", "French", "Hebrew", "Italian", "Dutch","Norwegian", "Portuguese","Russian","Swedish","Chinese" ]
-
+    const supporetedLangs = ["", "ar","de","en","es","fr","he","it","nl","no","pt","ru","sv","zh"]
+    const namesoflangs = ["all", "arabic", "german", "english","spanish",  "French", "Hebrew", "Italian", "Dutch","Norwegian", "Portuguese","Russian","Swedish","Chinese" ]
     
     useEffect( ()=> {
         //set news
@@ -28,26 +27,26 @@ const Everything = () => {
             params:{
                 apiKey,
                 q,
-                fromdate, 
-                todate, 
-                lang,
+                from : fromdate, 
+                to : todate, 
+                language,
                 pageSize,
                 sortBy,
             }
         })
         .then((response)=>{
+            console.log(response);
             setNews(response.data.articles)
         })
         .catch((error) => {
             console.log(error);
         })
         }
-    }, [q, pageSize, apiKey, fromdate, sortBy, lang, todate]);
+    }, [q, pageSize, apiKey, fromdate, todate, sortBy, language ]);
 
     // JSX Part 
     let articlesJSX = news.map((article, index) => {
         const {url, urlToImage, title, description} = article;
-        console.log(url);
         return (
             <div key={index} className={style.articleCard}>
                 <img src={urlToImage} alt="" />
@@ -57,8 +56,8 @@ const Everything = () => {
         )
     })
     let langsElement = 
-        <select defaultValue ={lang} 
-            onChange={e => { setLang(e.target.value)}} name="lang" id="lang"
+        <select defaultValue ={language} 
+            onChange={e => { setLanguage(e.target.value)}} name="language" id="language"
         >
             {supporetedLangs.map( (l, index)  => { 
                 return <option key={index} value={l} > 
