@@ -14,7 +14,7 @@ const Everything = () => {
     const [q, setQ] = useState("")
     const [fromdate, setFromdate] = useState(d)
     const [todate, setTodate] = useState(d);
-    const [SortBy, setSortBy] = useState("publishedAt");
+    const [sortBy, setSortBy] = useState("publishedAt");
 
     const suporetedSorts = ["relevancy", "popularity", "publishedAt" ]
     const supporetedLangs = ["", "ar","de","en","es","fr","he","it","nl","no","pt","ru","sv","ud","zh"]
@@ -32,7 +32,7 @@ const Everything = () => {
                 todate, 
                 lang,
                 pageSize,
-                SortBy,
+                sortBy,
             }
         })
         .then((response)=>{
@@ -42,7 +42,7 @@ const Everything = () => {
             console.log(error);
         })
         }
-    }, [q, pageSize, apiKey, fromdate]);
+    }, [q, pageSize, apiKey, fromdate, sortBy, lang, todate]);
 
     // JSX Part 
     let articlesJSX = news.map((article, index) => {
@@ -68,7 +68,7 @@ const Everything = () => {
             )}
         </select>
     let sortsElement =
-        <select name="sorts" id="sorts" value={SortBy}  onChange={(e) => {setSortBy(e.target.value)}}>
+        <select name="sorts" id="sorts" value={sortBy}  onChange={(e) => {setSortBy(e.target.value)}}>
             {
                 suporetedSorts.map( (s, index) =>{
                     return <option value={s} key={index}>
@@ -90,9 +90,10 @@ const Everything = () => {
                     <p>Number of results</p>
                     <input  value={pageSize} type="number" min={20} max={20} step="5"  onChange={(e) => setPageSize(e.target.value)}  />
                     <p>from:</p>
-                    <input type="date" name="from" id="from" />
+                    <input type="date" name="from" id="from" value={fromdate} onChange={(e)=> setFromdate(e.target.value)} />
                     <p>to:</p>
-                    <input type="date" name="to" id="to" />
+                    <input type="date" name="to" id="to" value={todate} onChange={(e)=> setTodate(e.target.value)} />
+                    
                 </div>
                 <section className={style.grid}>
                     {articlesJSX}
