@@ -4,13 +4,16 @@ import Layout from "../Layout";
 import key  from "../api/key.json";
 import style from "./style.module.css"
 const Everything = () => {
+    
+    var d = new Date();
+    d = d.toISOString();
     const apiKey = key.key2;
     const [news, setNews] = useState([]);
     const [lang, setLang] = useState("")
     const [pageSize, setPageSize] = useState(20);
     const [q, setQ] = useState("")
-    const [fromdate, setFromdate] = useState("");
-    const [todate, setTodate] = useState("");
+    const [fromdate, setFromdate] = useState(d)
+    const [todate, setTodate] = useState(d);
     const [SortBy, setSortBy] = useState("publishedAt");
 
     const suporetedSorts = ["relevancy", "popularity", "publishedAt" ]
@@ -20,7 +23,8 @@ const Everything = () => {
     
     useEffect( ()=> {
         //set news
-        axios.get('https://newsapi.org/v2/everything', {
+        if(q !==""){
+            axios.get('https://newsapi.org/v2/everything', {
             params:{
                 apiKey,
                 q,
@@ -37,6 +41,7 @@ const Everything = () => {
         .catch((error) => {
             console.log(error);
         })
+        }
     }, [q, pageSize, apiKey, fromdate]);
 
     // JSX Part 
@@ -74,6 +79,7 @@ const Everything = () => {
         </select>
     return (
         <Layout  q = {q} setQ={setQ}>
+            {q === "" && <div className={style.search}>Morate uneti pojam za pretragu</div>} 
             <main>
                 <input type="checkbox" name="check" id="check" className={style.check}/>
                 <div id="filters" className={style.filters}>

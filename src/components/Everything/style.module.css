@@ -57,3 +57,10 @@ main {
 .check:checked + .filters {
     translate: 0px;
 }
+.search{
+    width: 100%;
+    font-size: 72px;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    margin-top: 20px;
+}
