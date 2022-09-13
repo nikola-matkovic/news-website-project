@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import Layout from "../Layout";
 import key  from "../api/key.json";
-import style from "./style.module.css"
+import style from "../Everything/style.module.css"
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
