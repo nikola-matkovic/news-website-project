@@ -9,7 +9,6 @@ const Articel = () => {
     
     publishedAt = publishedAt.substring( 0, publishedAt.indexOf('T'))
 
-    console.log(author, content, description, publishedAt, source, title, url, urlToImage);
     return (
         <Layout> 
             <article className={style.article}>
