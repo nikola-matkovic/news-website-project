@@ -61,6 +61,11 @@ main {
     width: 100%;
     font-size: 72px;
     text-align: center;
-    font-family: 'Inter', sans-serif;
-    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    position: absolute;
+    height: 50vh;
+    translate: 0 -36px;
+    top: 25vh;
 }
