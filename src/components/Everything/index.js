@@ -3,8 +3,16 @@ import { useState, useEffect } from "react";
 import Layout from "../Layout";
 import key  from "../api/key.json";
 import style from "./style.module.css"
+import { useNavigate } from "react-router-dom";
+
 const Everything = () => {
     
+    let navigate = useNavigate();
+
+    const openArticle = (article) => {
+        navigate('/article',  {replace: false,  state:{article}});
+    }
+
     var d = new Date();
     d = d.toISOString().split('T')[0]
     const apiKey = key.key3;
@@ -46,9 +54,9 @@ const Everything = () => {
 
     // JSX Part 
     let articlesJSX = news.map((article, index) => {
-        const {url, urlToImage, title, description} = article;
+        const {urlToImage, title, description} = article;
         return (
-            <div key={index} className={style.articleCard}>
+            <div onClick={(e) => openArticle(article)}  key={index} className={style.articleCard}>
                 <img src={urlToImage} alt="" />
                 <h2>{title}</h2>
                 <p>{description}</p>
