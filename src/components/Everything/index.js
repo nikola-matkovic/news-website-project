@@ -88,7 +88,7 @@ const Everything = () => {
         <Layout  q = {q} setQ={setQ}>
             {q === "" && <div className={style.search}>Morate uneti pojam za pretragu</div>} 
             <main>
-                <input type="checkbox" name="check" id="check" className={style.check}/>
+                <input type="checkbox" name="check" id="check" className={style.check} />
                 <div id="filters" className={style.filters}>
                     <p>Select country</p>
                     {langsElement}
@@ -100,7 +100,6 @@ const Everything = () => {
                     <input type="date" name="from" id="from" value={fromdate} onChange={(e)=> setFromdate(e.target.value)} />
                     <p>to:</p>
                     <input type="date" name="to" id="to" value={todate} onChange={(e)=> setTodate(e.target.value)} />
-                    
                 </div>
                 <section className={style.grid}>
                     {articlesJSX}
