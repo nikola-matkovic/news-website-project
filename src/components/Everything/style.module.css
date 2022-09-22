@@ -1,0 +1,108 @@
+.grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 400px));
+    justify-content: space-evenly;
+    padding: 20px;
+    width: 100%;
+    transition: all .3s;
+}
+.articleCard{
+    border: 1px solid rgb(242, 242, 242);
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background-color: #fff;
+    overflow: hidden;
+    box-shadow: 1px 2px 20px 4px rgba(67, 67, 67, 0.2);
+    cursor: pointer;
+    padding-bottom: 10px;
+}
+.articleCard img{
+    max-width: 100%;
+}
+.articleCard h2{
+    margin: 5px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+.articleCard p,  .articleCard span{
+    margin: 5px;
+    font-family: 'Karla', sans-serif;
+}
+main {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+}
+.filters {
+    overflow: hidden;
+    z-index: 2;
+}
+.check {
+    display: none;
+}
+.check + .filters{
+    width: 300px;
+    transition: all .3s;
+    overflow: hidden;
+    position: fixed;
+    background-color: rgb(21, 21, 21);
+    height: 100vh ;
+    z-index: 2;
+    top: 50px;
+    left: 0;
+    translate: -300px;
+}
+.check:checked + .filters {
+    translate: 0px;
+}
+.search{
+    width: 100%;
+    font-size: 72px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    position: absolute;
+    height: 50vh;
+    translate: 0 -36px;
+    top: 25vh;
+}
+
+.filters {
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.filters p {
+    color: white;
+    font-size: 20px;
+}
+.filters select{
+    background-color: #007bff!important;
+    color: white;
+    padding: 12px;
+    font-size: 20px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: button;
+    appearance: button;
+    outline: none;
+}
+.filters input {
+    height: 30px;
+    outline: none;
+    padding: 20px;
+    font-size: 20px;
+    background-color: #007bff!important;
+    color: #fff; 
+}
+
+.filter select option {
+    padding: 30px;
+}

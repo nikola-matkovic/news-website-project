@@ -1,0 +1,22 @@
+.footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(20, 20, 20);
+    height: 80px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    font-size: 1.4rem;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 3px;
+    font-weight: 300;
+
+}
+.footer a, .footer a:visited{
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 30px;
+}
